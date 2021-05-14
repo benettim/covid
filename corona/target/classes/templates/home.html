@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Covid-19 Brasil</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+<h1>ESTATÍSTICAS COVID-19</h1>
+<p>Estatísticas diárias COVID-19 no Brasil</p>
+
+<div class="jumbotron">
+
+    <h1 class="display-4" th:text="${totalDeaths}"></h1>
+    <p class="lead">Total de mortos até hoje</p>
+    <hr class="my-4">
+    <p>
+        <span>Novos casos hoje:</span>
+        <span th:text="${newCases}"></span>
+    </p>
+    <p>
+        <span>Novas mortes hoje:</span>
+        <span th:text="${newDeaths}"></span>
+    </p>
+
+</div>
+
+    <table class="table">
+        <tr>
+            <th>Estado</th>
+            <th>Total Infectados</th>
+            <th>Recuperados</th>
+            <th>Total Mortos</th>
+            <th>Novos Infectados</th>
+            <th>Novos Mortos</th>
+        </tr>
+        <tr th:each="locationStat : ${locationStats}">
+            <td > <a th:href="@{'/'+${locationStat.state}}">[[${locationStat.state}]]</a></td>
+            <td th:text="${locationStat.totalCases}"></td>
+            <td th:text="${locationStat.recovered}"></td>
+            <td th:text="${locationStat.deaths}"></td>
+            <td th:text="${locationStat.newCases}"></td>
+            <td th:text="${locationStat.newDeaths}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+
+</html>
